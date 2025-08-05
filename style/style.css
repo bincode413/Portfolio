@@ -21,12 +21,14 @@ body {
     z-index: 1000;
     box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     backdrop-filter: blur(10px); 
-    width: 500px;
-    transition: width 0.3s ease;
+    width: 90%;
+    max-width: 500px;
+    transition: all 0.3s ease;
 }
 
 .navbar:hover {
-    width: 700px;
+    width: 95%;
+    max-width: 700px;
 }
 
 .nav-container {
@@ -46,10 +48,8 @@ body {
     font-weight: bold;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     text-align: center; 
-    transition: transform 0.3s ease;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    flex: 1;
 }
 
 .title-link {
@@ -61,10 +61,6 @@ body {
 .title-link:hover {
     color: rgba(255, 255, 255, 0.8);
     text-shadow: 0 2px 8px rgba(255,255,255,0.3);
-}
-
-.navbar:hover .nav-title {
-    transform: translateX(-310px);
 }
 
 /* 네비게이션 링크 */
@@ -274,4 +270,217 @@ p {
     border-color: rgba(255, 255, 255, 0.3);
     color: white;
     transform: translateX(10px);
+}
+
+/* 모바일 반응형 디자인 */
+@media (max-width: 768px) {
+    /* 네비게이션 바 모바일 최적화 */
+    .navbar {
+        width: 95%;
+        max-width: none;
+        border-radius: 20px;
+        top: 5px;
+    }
+    
+    .navbar:hover {
+        width: 95%;
+    }
+    
+    .nav-container {
+        padding: 10px 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .nav-title {
+        position: static;
+        transform: none;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .navbar:hover .nav-title {
+        transform: none;
+    }
+    
+    /* 검색바 모바일 최적화 */
+    .search-container {
+        opacity: 1;
+        transform: none;
+        margin-left: 0;
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .search-bar {
+        width: 150px;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+    
+    .search-bar:focus {
+        width: 180px;
+    }
+    
+    .search-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    
+    /* 배너 모바일 최적화 */
+    .banner {
+        height: 200px;
+    }
+    
+    /* 콘텐츠 컨테이너 모바일 최적화 */
+    .content-container {
+        padding: 0 20px;
+        margin-top: 10px;
+    }
+    
+    /* 로고 모바일 최적화 */
+    .logo-overlay {
+        position: relative;
+        top: -50px;
+        left: 20px;
+        margin-bottom: -30px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+        padding: 10px;
+    }
+    
+    /* 텍스트 모바일 최적화 */
+    h1 {
+        font-size: 28px;
+        margin-top: 20px;
+    }
+    
+    h2 {
+        font-size: 20px;
+        margin: 15px 0 5px 0;
+    }
+    
+    h3 {
+        font-size: 16px;
+    }
+    
+    p {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    /* 페이지 링크 모바일 최적화 */
+    .page-link {
+        font-size: 14px;
+        padding: 10px 15px;
+        min-width: auto;
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    
+    .page-link:hover {
+        transform: translateY(-2px);
+    }
+}
+
+/* 데스크톱 최적화 (769px 이상) */
+@media (min-width: 769px) {
+    .navbar {
+        width: 500px;
+        max-width: 500px;
+    }
+    
+    .navbar:hover {
+        width: 700px;
+        max-width: 700px;
+    }
+    
+    .nav-container {
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .nav-title {
+        flex: 0 0 auto;
+        margin-right: 20px;
+    }
+    
+    .search-container {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.3s ease;
+    }
+    
+    .navbar:hover .search-container {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    
+    .search-bar {
+        width: 200px;
+    }
+    
+    .search-bar:focus {
+        width: 250px;
+    }
+}
+
+/* 작은 모바일 화면 (320px 이하) */
+@media (max-width: 320px) {
+    .navbar {
+        width: 98%;
+        border-radius: 15px;
+    }
+    
+    .nav-title {
+        font-size: 1rem;
+    }
+    
+    .search-bar {
+        width: 120px;
+    }
+    
+    .search-bar:focus {
+        width: 140px;
+    }
+    
+    .banner {
+        height: 150px;
+    }
+    
+    .content-container {
+        padding: 0 15px;
+    }
+    
+    .logo-overlay {
+        left: 15px;
+    }
+    
+    .logo {
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    h2 {
+        font-size: 18px;
+    }
+    
+    p {
+        font-size: 13px;
+    }
+    
+    .page-link {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
 }
