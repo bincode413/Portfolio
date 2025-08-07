@@ -236,6 +236,205 @@ p {
     line-height: 1.6;
 }
 
+.code {
+    color: #e6f3ff;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px 0 5px 0;
+    text-align: left;
+    background: linear-gradient(135deg, rgba(40, 44, 52, 0.95), rgba(33, 37, 43, 0.95));
+    border: 1px solid rgba(97, 175, 239, 0.3);
+    padding: 0px 12px;
+    border-radius: 6px;
+    display: block;
+    white-space: pre;
+    word-wrap: break-word;
+    box-shadow: 
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.code::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: linear-gradient(135deg, rgba(50, 54, 62, 0.95), rgba(43, 47, 53, 0.95));
+    border-bottom: 1px solid rgba(97, 175, 239, 0.2);
+    border-radius: 6px 6px 0 0;
+}
+
+.code::after {
+    content: 'Python ▼';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: rgba(97, 175, 239, 0.4);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    pointer-events: none;
+    user-select: none;
+    transition: transform 0.3s ease;
+}
+
+.code.collapsed::after {
+    content: 'Python ▶';
+}
+
+.code-content {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+}
+
+
+.code.collapsed .code-content {
+    max-height: 0;
+    opacity: 0;
+}
+
+/* 접을 수 있는 코드 블록 */
+.code-block {
+    margin: 20px 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(40, 44, 52, 0.95), rgba(33, 37, 43, 0.95));
+    border: 1px solid rgba(97, 175, 239, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.code-header {
+    background: linear-gradient(135deg, rgba(50, 54, 62, 0.95), rgba(43, 47, 53, 0.95));
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(97, 175, 239, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.code-header:hover {
+    background: linear-gradient(135deg, rgba(55, 59, 67, 0.95), rgba(48, 52, 58, 0.95));
+}
+
+.code-language {
+    color: #61afef;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.code-language::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #61afef;
+    box-shadow: 0 0 8px rgba(97, 175, 239, 0.4);
+}
+
+.code-toggle {
+    color: #abb2bf;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+.code-toggle::after {
+    content: '▼';
+    transition: transform 0.3s ease;
+}
+
+.code-block.collapsed .code-toggle::after {
+    transform: rotate(-90deg);
+}
+.code-block.collapsed .code-content {
+    max-height: 0;
+    opacity: 0;
+}
+
+.code-content {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.code-pre {
+    white-space: pre;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 14px;
+}
+
+
+/* Python 구문 강조 */
+.python-keyword { color: #c678dd; font-weight: 600; }
+.python-string { color: #98c379; }
+.python-comment { color: #5c6370; font-style: italic; }
+.python-function { color: #61afef; }
+.python-number { color: #d19a66; }
+.python-operator { color: #56b6c2; }
+.python-builtin { color: #e06c75; }
+.python-variable { color: #e5c07b; }
+
+/* 줄 번호 */
+.code-line {
+    display: block;
+    position: relative;
+    padding-left: 50px;
+}
+
+.code-line::before {
+    content: attr(data-line);
+    position: absolute;
+    left: 0;
+    width: 40px;
+    color: rgba(171, 178, 191, 0.4);
+    text-align: right;
+    user-select: none;
+    font-size: 12px;
+}
+
+.code-line:hover {
+    background: rgba(97, 175, 239, 0.1);
+}
+
+/* 스크롤바 스타일링 */
+.code-pre::-webkit-scrollbar {
+    height: 8px;
+}
+
+.code-pre::-webkit-scrollbar-track {
+    background: rgba(40, 44, 52, 0.5);
+    border-radius: 4px;
+}
+
+.code-pre::-webkit-scrollbar-thumb {
+    background: rgba(97, 175, 239, 0.3);
+    border-radius: 4px;
+}
+
+.code-pre::-webkit-scrollbar-thumb:hover {
+    background: rgba(97, 175, 239, 0.5);
+}
 /* 페이지 목록 */
 .page-links {
     margin-top: 30px;
@@ -484,3 +683,21 @@ p {
         padding: 8px 12px;
     }
 }
+.code-content::-webkit-scrollbar {
+    height: 8px;  /* 가로 스크롤바 두께 (↓ 높이) */
+    width: 10px;  /* 세로 스크롤바 두께 */
+  }
+  
+  .code-content::-webkit-scrollbar-track {
+    background: #2d2d2d;  /* 트랙 색상 (배경) */
+    border-radius: 10px;
+  }
+  
+  .code-content::-webkit-scrollbar-thumb {
+    background: #555;  /* 스크롤 핸들 색상 */
+    border-radius: 10px;
+  }
+  
+  .code-content::-webkit-scrollbar-thumb:hover {
+    background: #888;  /* 마우스 올렸을 때 색상 */
+  }

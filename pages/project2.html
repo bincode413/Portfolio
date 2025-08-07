@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" type="image/png" href="../img/logo.png">
+    <title>🎈 승현 빈</title>
+</head>
+<body class="solid-bg">
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="nav-title"><a href="../index.html" class="title-link">🎈 승현 빈</a></h1>
+            <div class="search-container">
+                <input type="text" class="search-bar" placeholder="검색...">
+                <button class="search-btn">🔥</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="banner-container">
+        <img src="../img/banner.png" alt="배너" class="banner">
+        <div class="logo-overlay">
+            <img src="../img/logo.png" alt="로고" class="logo">
+        </div>
+    </div>
+
+    <div class="content-container">
+        <h1>🎈 단어장 프로젝트</h1>
+        <h2>프로젝트 개요</h2>
+        <p>파이썬의 딕셔너리의 기초와 인공지능을 연결시킬 수 있는 좋은 프로젝트를 생각하던 중, 딕셔너리의 뜻인, 사전 즉 단어장을 만들면 좋을 것 같다는 생각이 들었다.</p>
+        <h2>개발 계획</h2>
+        <h3>구현 요소</h3>
+        <p>1. 단어 추가 기능 구현</p>
+        <p>2. 단어 삭제 기능 구현</p>
+        <p>3. 단어 조회 기능 구현</p>
+        <p>4. 단어에 대한 질문 기능 구현</p>
+        <h3>개발 환경</h3>
+        <p>python</p>
+        <p>openai -> 인공지능 모델 실행 환경</p>
+        <h2>개발 과정</h2>
+        <p>먼저 기본적인 단어장의 기능을 구현하였습니다.</p>
+        <div class="code" onclick="toggleSimpleCode(this)">
+            <div class="code-content">
+                <p>
+words = {}
+while True:
+    sel = int(input('사전[1:입력/2:삭제/3:조회/0:종료]'))
+    if sel == 0:
+        break
+    elif sel == 1:
+        while True:
+            word1 = input('단어:')
+            if word1 not in words:
+                break
+            print('이미 등록된 단어입니다.')
+        words[word1] = input('단어 뜻:')
+        print(words)
+    elif sel == 2:
+        print(words)
+        while True:
+            word1 = input('단어:')
+            if word1 in words:
+                break
+            print('없는 단어입니다.')
+        del(words[word1])
+        print(words)
+    elif sel == 3:
+        while True:
+            myword = input(str(list(words.keys()))+"중 무엇을 조회할까요?")
+            if myword in words:
+                break
+            print('없는 단어입니다.')
+        print(words[myword])
+    else:
+        print('잘못된 입력입니다.')</p>
+            </div>
+        </div>
+        <p>이후 인공지능을 연결하여 단어에 대한 질문을 할 수 있도록 구현하였습니다.</p>
+        <div class="code" onclick="toggleSimpleCode(this)">
+            <div class="code-content">
+                <p>
+from ollama import chat
+def request(prompt):
+    response = chat(model='gemma3:1b',
+                    messages=[{'role':'system', 'content':'you are a helpful assistant, Your name is HIRO, you must say in korean'},
+                                {'role':'user','content':'word_list: '+str(list(words.items()))+'\nuser: '+prompt}]
+                                ,stream=True)
+    for chunk in response:
+        print(chunk['message']['content'],end='',flush=True)
+
+words = {}
+while True:
+    print('사전[1:입력/2:삭제/3:조회/4:AI튜터/0:종료]')
+    sel = int(input('>> '))
+    if sel == 0:
+        break
+    elif sel == 1:
+        while True:
+            print('단어 입력')
+            word1 = input('>> ')
+            if word1 not in words:
+                break
+            print('이미 등록된 단어입니다.')
+        print('단어 뜻 입력')
+        words[word1] = input('>> ')
+        print(words)
+    elif sel == 2:
+        print(words)
+        while True:
+            print('단어 삭제')
+            word1 = input('>> ')
+            if word1 in words:
+                break
+            print('없는 단어입니다.')
+        del(words[word1])
+        print(words)
+    elif sel == 3:
+        while True:
+            print(str(list(words.keys()))+"중 무엇을 조회할까요?")
+            myword = input('>> ')
+            if myword in words:
+                break
+            print('없는 단어입니다.')
+        print(words[myword])
+    elif sel == 4:
+        print('--------------------------------')
+        while True:
+            print('✏️ YOU (IF YOU WANT TO EXIT, TYPE "EXIT")')
+            ipt = input('')
+            if ipt == 'EXIT':
+                break
+            print('✨ AI')
+            request(ipt)
+            print()
+            print('--------------------------------')
+        print('--------------------------------')
+    else:
+        print('잘못된 입력입니다.')</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleSimpleCode(codeElement) {
+            codeElement.classList.toggle('collapsed');
+        }
+    </script>
+</body>
+</html>
